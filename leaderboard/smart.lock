@@ -1,0 +1,20 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "observatory": {}
+    },
+    "packages": {
+      "observatory": {
+        "git": "https://github.com/jhoxray/observatory.git",
+        "tag": "v0.2.53",
+        "commit": "7d6ccd5dd8677ebd5ff13be0219992ed026d7f83"
+      },
+      "observatory-apollo": {
+        "git": "https://github.com/superstringsoftware/observatory-apollo.git",
+        "branch": "master",
+        "commit": "e1ae0ba6751314398710b3e26ba4b9c09f371693"
+      }
+    }
+  }
+}

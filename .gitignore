@@ -1,0 +1,41 @@
+# Python bytecode
+*.pyc
+*.pyo
+
+# Editor File Trash
+*~
+\#*\#
+.*project*
+.settings
+
+# Packages
+.buildout
+bin
+.installed.cfg
+*.egg-info
+*.egg
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+cover
+.coverage
+.tox
+
+# Others
+dist
+*.orig
+log.txt*
+*.pdo
+tmp/
+*.db
+.env/
+env/
+src/app/resources/store/
+
+# Sphinx Ignores
+docs/Makefile
+docs/make.bat
+docs/html
+docs/doctrees

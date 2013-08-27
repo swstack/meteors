@@ -1,0 +1,32 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "observatory": {},
+      "reddit": {},
+      "util": {}
+    },
+    "packages": {
+      "observatory": {
+        "git": "https://github.com/jhoxray/observatory.git",
+        "tag": "v0.2.53",
+        "commit": "7d6ccd5dd8677ebd5ff13be0219992ed026d7f83"
+      },
+      "reddit": {
+        "git": "https://github.com/kidovate/meteor-reddit.git",
+        "tag": "v0.1.2",
+        "commit": "81e3e6df82a588bca5395fa543a9570d715d550d"
+      },
+      "util": {
+        "git": "https://github.com/peerlibrary/meteor-util.git",
+        "tag": "v0.2.1",
+        "commit": "918f04d7645ce46b3dc7d23e15417f840cd20a4d"
+      },
+      "observatory-apollo": {
+        "git": "https://github.com/superstringsoftware/observatory-apollo.git",
+        "branch": "master",
+        "commit": "e1ae0ba6751314398710b3e26ba4b9c09f371693"
+      }
+    }
+  }
+}
