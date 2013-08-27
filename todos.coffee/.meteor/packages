@@ -10,5 +10,7 @@ spiderable
 jquery
 preserve-inputs
 insecure
-coffeescript
 observatory
+reddit
+util
+coffeescript
