@@ -1,0 +1,16 @@
+<head>
+    <title>Things</title>
+</head>
+
+<body>
+    <h1>All teh thingz</h1>
+    {{> things}}
+</body>
+
+<template name="things">
+    <div>
+        {{#each things}}
+            {{ tickVal }} <br \>
+        {{/each}}
+    </div>
+</template>

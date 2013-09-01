@@ -1,47 +1,48 @@
-root = exports ? this
+# root = exports ? this
 
-class root.Publisher
-    constructor: () ->
-        # define some collections
-        Lists = new Meteor.Collection "lists"
-        Todos = new Meteor.Collection "todos"
 
-        # save them in array for iter by :method:publishAll
-        @collections = [\
+# class root.Publisher
+#     constructor: (Lists, Todos) ->
+#         # define some collections
+#         # Lists = new Meteor.Collection "lists"
+#         # Todos = new Meteor.Collection "todos"
 
-                lists =
-                    name: "lists"
-                    self: Lists
-                    returnFn: () -> return Lists.find()
+#         # save them in array for iter by :method:publishAll
+#         @collections = [\
 
-                todos =
-                    name: "todos"
-                    self: Todos
-                    returnFn: (list) -> return Todos.find({list: list})
-        ]
-        
-    start: () ->
-        Log.info "Publisher starting..."
-        Log.info "...done."
+#                 lists =
+#                     name: "lists"
+#                     self: Lists
+#                     returnFn: () -> return Lists.find()
 
-    # private
-    _publish:(name, ret) ->
-        Log.info "Publish... " + name
-        Meteor.publish name, ret
+#                 todos =
+#                     name: "todos"
+#                     self: Todos
+#                     returnFn: (list) -> return Todos.find({list: list})
+#         ]
 
-    publish: (key) ->
-        # TODO: non-iterative search
-        for collection in @collections
-            if collection.name == key
-                @_publish(collection.name, collection.returnFn)
-                break
+#     start: () ->
+#         Log.info "Publisher starting..."
+#         Log.info "...done."
 
-    publishAll: () ->
-        for collection in @collections
-            @_publish(collection.name, collection.returnFn)
+#     # private
+#     _publish:(name, ret) ->
+#         Log.info "Publish... " + name
+#         Meteor.publish name, ret
 
-    getCollection: (key) ->
-        # TODO: non-iterative search
-        for collection in @collections
-            if collection.name == key
-                return collection.self
+#     publish: (key) ->
+#         # TODO: non-iterative search
+#         for collection in @collections
+#             if collection.name == key
+#                 @_publish(collection.name, collection.returnFn)
+#                 break
+
+#     publishAll: () ->
+#         for collection in @collections
+#             @_publish(collection.name, collection.returnFn)
+
+#     getCollection: (key) ->
+#         # TODO: non-iterative search
+#         for collection in @collections
+#             if collection.name == key
+#                 return collection.self
