@@ -1,16 +1,65 @@
 <head>
     <title>Things</title>
+    <link href="/css/bootstrap.css" rel="stylesheet" media="screen">
+	<link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+	<link href="/css/style.css" rel="stylesheet" media="screen">
+	<link href="/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <h1>All teh thingz</h1>
-    {{> things}}
+    {{ renderPage }}
 </body>
 
-<template name="things">
-    <div>
-        {{#each things}}
-            {{ tickVal }} <br \>
-        {{/each}}
+<template name="start">
+    <h3 id="slogan" class="datOrangeText">WIKI FOR HUMON'S</h3>
+    <hr class="datOrange">
+    <h1 id="title">start now </h1>
+    <div id="container">
+        <form class="form-horizontal">
+            <div class="control-group">
+            <label class="control-label" for="inputEmail">Wiki Name</label>
+            <div class="controls">
+              <input type="text" id="inputEmail" placeholder="Email">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputEmail">Email</label>
+            <div class="controls">
+              <input type="text" id="inputEmail" placeholder="Email">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPassword">Password</label>
+            <div class="controls">
+              <input type="password" id="inputPassword" placeholder="Password">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPassword">Do it again!</label>
+            <div class="controls">
+              <input type="password" id="inputPassword" placeholder="Password">
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+                <button class="btn-inverse datOrangeBackground">
+                    It's <span>Time.</span>
+                    <i class="icon-circle-arrow-right"></i>
+                </button>
+            </div>
+          </div>
+        </form>
     </div>
+</template>
+
+<template name="wiki-instance">
+    Thanks.
+        -----Data dump----
+        Wiki Name:
+        Users:
+        Admins:
+        Messages:
+        etc.
+        etc.
 </template>
