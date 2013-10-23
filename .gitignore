@@ -1,3 +1,6 @@
+*.meteor/
+*.log
+
 # Python bytecode
 *.pyc
 *.pyo
