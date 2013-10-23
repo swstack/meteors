@@ -1,14 +1,32 @@
 moarStuff = new Meteor.Collection "moarStuff"
 
-class foo
+
+class Headers
+    constructor: () ->
+        @list = {}
+
+    get: (header) =>
+        # return header ? @list[header] : @list
+        if header
+            return @list[header]
+        else
+            @lsit
+
+
+class Server
     constructor: (bar) ->
         @bar = bar
 
+        if (typeof WebApp != "undefined")
+            app = WebApp.connectHandlers
+        else
+            app = __meteor_bootstrap__.app
+
     start: () ->
-        Meteor.setInterval(@doSomething, 3000)
+        Meteor.setInterval(@tick, 3000)
 
 
-    doSomething: () =>
+    tick: () =>
     	exists = moarStuff.find({"value": @bar}).fetch()
 
     	if exists.length > 0
@@ -19,5 +37,26 @@ class foo
 
 	    @bar++
 
-x = new foo 0
-x.start()
+Meteor.methods({
+    "getReqHeader": (header) ->
+        return reqHeaders[header]
+
+    "getReqHeaders": () ->
+        return reqHeaders
+})
+# onConnect = () ->
+#     console.log "Client connected: " + "farts"
+
+# WebApp.connectHandlers.use onConnect
+
+server = new Server 0
+server.start()
+
+# app = typeof WebApp != "undefined" ? WebApp.connectHandlers : __meteor_bootstrap__.app
+
+
+app.use (request, response, next) =>
+    # Called on client connect
+    reqHeaders = request.headers
+    console.log reqHeaders
+    return next()
