@@ -1,9 +1,25 @@
+knownWikis =
+    "humonwiki.com": "humonwiki.com"
+    "foo.humonwiki.com": "foo.humonwiki.com"
+    "bar.humonwiki.com": "bar.humonwiki.com"
+
 class root.WikiDispatcher
     constructor: () ->
 
-    getWiki: (domain) =>
-        return domain
+    dispatch: (domain) =>
+        if domain == "humonwiki.com"
+            @renderSignUpPage()
+        else
+            @renderWiki()
 
+    renderSignUpPage: ()=>
+        console.log Meteor
+        Meteor.render ()=>
+            Template.signup()
+
+    renderWiki: ()=>
+        Meteor.render ()=>
+            Tempate.wiki()
 
 class root.Server
     constructor: (wikiDispatcher) ->
@@ -21,5 +37,5 @@ class root.Server
     onClientConnect: (request, response, next) =>
         # Called on client connect
         reqHeaders = request.headers
-        wiki = @wikiDispatcher.getWiki reqHeaders.host
+        @wikiDispatcher.dispatch reqHeaders.host
         return next()
