@@ -1,41 +1,30 @@
-knownWikis =
-    "humonwiki.com": "humonwiki.com"
-    "foo.humonwiki.com": "foo.humonwiki.com"
-    "bar.humonwiki.com": "bar.humonwiki.com"
-
-class root.WikiDispatcher
+class Headers
     constructor: () ->
+        @list = {}
 
-    dispatch: (domain) =>
-        if domain == "humonwiki.com"
-            @renderSignUpPage()
+    get: (header) =>
+        # return header ? @list[header] : @list
+        if header
+            return @list[header]
         else
-            @renderWiki()
+            return @list
 
-    renderSignUpPage: ()=>
-        console.log Meteor
-        Meteor.render ()=>
-            Template.signup()
 
-    renderWiki: ()=>
-        Meteor.render ()=>
-            Tempate.wiki()
+Meteor.methods({
+    getReqHeader: (header) ->
+        return reqHeaders[header]
 
-class root.Server
-    constructor: (wikiDispatcher) ->
-        @wikiDispatcher = wikiDispatcher
+    getReqHeaders: () ->
+        return reqHeaders
+})
 
-    start: () ->
-        # setup onClientConnect callback
-        if (typeof WebApp != "undefined")
-            app = WebApp.connectHandlers
-        else
-            app = __meteor_bootstrap__.app
-        app.use (request, response, next) =>
-            @onClientConnect request, response, next
+if (typeof WebApp != "undefined")
+    app = WebApp.connectHandlers
+else
+    app = __meteor_bootstrap__.app
 
-    onClientConnect: (request, response, next) =>
-        # Called on client connect
-        reqHeaders = request.headers
-        @wikiDispatcher.dispatch reqHeaders.host
-        return next()
+app.use (request, response, next) =>
+    # Called on client connect
+    reqHeaders = request.headers
+    console.log reqHeaders
+    return next()

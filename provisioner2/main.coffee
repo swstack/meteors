@@ -1,6 +1,5 @@
 if Meteor.isServer
-    wikiDispatcher = new root.WikiDispatcher
-    server = new root.Server wikiDispatcher
+    server = new root.Server
     server.start()
     console.log "Server initialization complete."
 
