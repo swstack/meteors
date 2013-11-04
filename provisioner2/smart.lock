@@ -3,7 +3,8 @@
   "dependencies": {
     "basePackages": {
       "router": {},
-      "iron-router": {}
+      "iron-router": {},
+      "handlebars-server": {}
     },
     "packages": {
       "router": {
@@ -13,8 +14,13 @@
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.6.0",
-        "commit": "c63e92d24c8210e2304ff5fed1b5c463394aeaf6"
+        "tag": "v0.6.1",
+        "commit": "4e1ee0581d68bff422a915dacb0bd30eae10fe08"
+      },
+      "handlebars-server": {
+        "git": "https://github.com/EventedMind/meteor-handlebars-server.git",
+        "tag": "v1.1.0",
+        "commit": "ed99c8e9280894519f44a5b4c84f66ff596c5450"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

@@ -9,7 +9,6 @@ class Headers
         else
             return @list
 
-
 Meteor.methods({
     getReqHeader: (header) ->
         return reqHeaders[header]

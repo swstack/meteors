@@ -1,7 +1,2 @@
-domain = null
-
-
-domainCallback = (err, result) ->
-	console.log result
-
-Meteor.call("getDomain", domainCallback)
+Meteor.startup ()->
+    Meteor.call "getDomain", (err, val)-> Session.set "domain", val

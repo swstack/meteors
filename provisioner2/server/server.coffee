@@ -1,6 +1,5 @@
 class root.Server
-    constructor: (wikiDispatcher) ->
-        @wikiDispatcher = wikiDispatcher
+    constructor: () ->
         @reqHeaders = null
 
     start: () ->
@@ -21,7 +20,6 @@ class root.Server
     onClientConnect: (request, response, next) =>
         # Called on client connect
         @reqHeaders = request.headers
-        # @wikiDispatcher.dispatch reqHeaders.host
         return next()
 
     getDomain: () =>
