@@ -1,5 +1,5 @@
 if Meteor.isServer
-    server = new root.Server
+    server = new Server
     server.start()
     console.log "Server initialization complete."
 

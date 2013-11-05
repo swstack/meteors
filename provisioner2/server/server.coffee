@@ -1,9 +1,16 @@
+root = exports ? this
+
 class root.Server
     constructor: () ->
+        #=======================================================================
+        # Server constructor
+        #=======================================================================
         @reqHeaders = null
 
     start: () ->
-        # setup onClientConnect callback
+        #=======================================================================
+        # Start
+        #=======================================================================
         if (typeof WebApp != "undefined")
             app = WebApp.connectHandlers
         else
@@ -18,20 +25,31 @@ class root.Server
         })
 
     onClientConnect: (request, response, next) =>
+        #=======================================================================
         # Called on client connect
+        #=======================================================================
         @reqHeaders = request.headers
         return next()
 
-    getDomain: () =>
-        chunks = @reqHeaders.host.split(".")
-        if chunks.length > 2
-            return chunks[0]
-        else
-            return null
-        return @reqHeaders.host
+    # getDomain: () =>
+    #     #=======================================================================
+    #     # Return a valid domain if any
+    #     #=======================================================================
+    #     domain = @reqHeaders.host.split(".")
+    #     if chunks.length > 2
+    #         return chunks[0]
+    #     else
+    #         return null
+    #     return @reqHeaders.host
 
     getReqHeaders: () =>
+        #=======================================================================
+        # Get all headers
+        #=======================================================================
         return @reqHeaders
 
-    getReqHeader:(header) =>
-        return @reqHeader[header]
+    getReqHeader: (header) =>
+        #=======================================================================
+        # Get specific header
+        #=======================================================================
+        return @reqHeaders[header]

@@ -1,2 +1,2 @@
 Meteor.startup ()->
-    Meteor.call "getDomain", (err, val)-> Session.set "domain", val
+    Meteor.call "getReqHeader", "host", (err, val)-> Session.set "host", val
