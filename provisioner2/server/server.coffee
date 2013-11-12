@@ -1,5 +1,8 @@
 root = exports ? this
 
+Wikis = new Meteor.Collection("wikis")
+
+
 class root.Server
     constructor: () ->
         #=======================================================================
@@ -22,6 +25,7 @@ class root.Server
             getReqHeaders: @getReqHeaders
             getReqHeader: @getReqHeader
             getDomain: @getDomain
+            attemptSignup: @attemptSignup
         })
 
     onClientConnect: (request, response, next) =>
@@ -30,17 +34,6 @@ class root.Server
         #=======================================================================
         @reqHeaders = request.headers
         return next()
-
-    # getDomain: () =>
-    #     #=======================================================================
-    #     # Return a valid domain if any
-    #     #=======================================================================
-    #     domain = @reqHeaders.host.split(".")
-    #     if chunks.length > 2
-    #         return chunks[0]
-    #     else
-    #         return null
-    #     return @reqHeaders.host
 
     getReqHeaders: () =>
         #=======================================================================
@@ -53,3 +46,14 @@ class root.Server
         # Get specific header
         #=======================================================================
         return @reqHeaders[header]
+
+    attemptSignup: (wiki, username, password) =>
+        Accounts.createUser({
+            username: username
+            password: password
+            })
+        console.log "sup"
+        if Wikis.findOne({name: wiki})
+            console.log "Wiki already exists"
+        else
+            Wikis.insert({name: wiki})
