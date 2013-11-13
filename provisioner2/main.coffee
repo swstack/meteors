@@ -5,5 +5,7 @@ if Meteor.isServer
 
 if Meteor.isClient
     client = new Client
+    router = new WikiRouter(client)
     client.start()
+    router.start()
     console.log "Client initialization complete."

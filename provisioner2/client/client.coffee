@@ -1,18 +1,14 @@
-root = exports ? this
+Wikis = new Meteor.Collection()
 
 
-Meteor.startup ()->
-    Meteor.call "getReqHeader", "host", (err, val)-> Session.set "host", val
-
-
-class root.Client
+class @Client
     constructor: () ->
         #=======================================================================
         # Client constructor
         #=======================================================================
         
 
-    start: () ->
+    start: () =>
     	#=======================================================================
         # Start
         #=======================================================================
@@ -28,15 +24,28 @@ class root.Client
         #=======================================================================
         wiki = document.getElementById("signup-wiki").value
         email = document.getElementById("signup-email").value
-        pw = document.getElementById("signup-password").value
+        password = document.getElementById("signup-password").value
 
-        # do validation on password, email and wiki
+        # do validation on email/password and wiki
+        if Wikis.findOne({name: wiki})
+            console.log "Wiki already exists"
+            Router.go("signUp")
+        else
+            Wikis.insert({name: wiki})
 
+        # sign them up
         Accounts.createUser({
             email: email
-            password: pw
-            }, (err)->
-                console.log err)
+            password: password
+        }, (err) ->
+            console.log err
+        )
 
-        console.log "wtf"
-        # Meteor.call("attemptSignup", wiki, email, pw)
+        # send them to the new wiki
+        Router.go("/" + wiki)
+
+    isValidWiki: (wiki_name) =>
+        if Wikis.findOne({name: wiki_name})
+            return true
+        else
+            return false

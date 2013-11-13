@@ -1,44 +1,39 @@
-Wikis = new Meteor.Collection()
+class @WikiRouter
+    constructor: (client) ->
+        #=======================================================================
+        # Router constructor
+        #=======================================================================
+        @client = client
 
+    start: () =>
+        #=======================================================================
+        # Start
+        #=======================================================================
+        Router.configure({
+            layoutTemplate: "layout"
+        })
 
-Router.configure({
-    layoutTemplate: "layout"
-})
+        @mapRoutes(@client)
 
+    mapRoutes: (client) =>
+        #=======================================================================
+        # Closure for the router so it has a ref to ``client``
+        #=======================================================================
+        Router.map () ->
+            this.route "signUp", {
+                path: "/"
+                template: "signup"
+            }
 
-Router.map () ->
-    this.route "home", {
-        path: "/"
-        load: () ->
-            # this.template = getPage(Session.get("host"))
+            this.route "home", {
+                path: "/:wikiName"
+                before: [
+                    () ->
+                        if client.isValidWiki(this.params.wikiName)
+                            this.template = "wiki"
+                        else
+                            console.log "Not a valid wiki name"
+                            Router.go("signUp")
 
-        before: [
-            () ->
-                this.template = getPage(Session.get("host"))
-        ]
-    }
-
-getPage = (host) ->
-    if typeof host == "undefined"
-        return "loading"
-    else
-        subdomain = getSubDomain(host)
-        loggedIn = Meteor.user()
-        if subdomain and loggedIn
-            return "wiki"
-        else
-            return "signup"
-
-getSubDomain = (host) ->
-    chunks = host.split(".")
-    if chunks.length > 2
-        subdomain = chunks[0]
-        if isValidWiki(subdomain)
-            return subdomain
-
-    return null
-
-
-
-isValidWiki = (subdomain) ->
-    return false
+                ]
+            }
