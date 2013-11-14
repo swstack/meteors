@@ -1,29 +1,48 @@
-class Headers
+Wikis = new Meteor.Collection("wikis")
+
+
+class @Server
     constructor: () ->
-        @list = {}
+        #=======================================================================
+        # Server constructor
+        #=======================================================================
+        @reqHeaders = null
 
-    get: (header) =>
-        # return header ? @list[header] : @list
-        if header
-            return @list[header]
+    start: () =>
+        #=======================================================================
+        # Start
+        #=======================================================================
+        if (typeof WebApp != "undefined")
+            app = WebApp.connectHandlers
         else
-            return @list
+            app = __meteor_bootstrap__.app
+        app.use (request, response, next) =>
+            @_onClientConnect request, response, next
 
-Meteor.methods({
-    getReqHeader: (header) ->
-        return reqHeaders[header]
+        Meteor.methods({
+            getReqHeaders: @getReqHeaders
+            getReqHeader: @getReqHeader
+            addWiki: @addWiki
+        })
 
-    getReqHeaders: () ->
-        return reqHeaders
-})
+    _onClientConnect: (request, response, next) =>
+        #=======================================================================
+        # Called on client connect
+        #=======================================================================
+        @reqHeaders = request.headers
+        return next()
 
-if (typeof WebApp != "undefined")
-    app = WebApp.connectHandlers
-else
-    app = __meteor_bootstrap__.app
+    getReqHeaders: () =>
+        #=======================================================================
+        # Get all headers
+        #=======================================================================
+        return @reqHeaders
 
-app.use (request, response, next) =>
-    # Called on client connect
-    reqHeaders = request.headers
-    console.log reqHeaders
-    return next()
+    getReqHeader: (header) =>
+        #=======================================================================
+        # Get specific header
+        #=======================================================================
+        return @reqHeaders[header]
+
+    addWiki: (name) =>
+        Wikis.insert({name: name})

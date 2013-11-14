@@ -1,5 +1,7 @@
 {
   "packages": {
-    "iron-router": {}
+    "router": {},
+    "iron-router": {},
+    "handlebars-server": {}
   }
 }

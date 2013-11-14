@@ -26,13 +26,14 @@ class @WikiRouter
             }
 
             this.route "home", {
-                path: "/:wikiName"
+                path: "/public/:wikiName"
                 before: [
                     () ->
-                        if client.isValidWiki(this.params.wikiName)
+                        wikiName = this.params.wikiName
+                        if client.isValidWiki(wikiName)
                             this.template = "wiki"
                         else
-                            console.log "Not a valid wiki name"
+                            console.log "Not a valid wiki name - " + wikiName
                             Router.go("signUp")
 
                 ]
