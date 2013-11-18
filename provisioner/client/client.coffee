@@ -12,11 +12,11 @@ class @Client
     	#=======================================================================
         # Start
         #=======================================================================
-        Template.signup.events = {
-        	"click #login-button": @onSignUp
+        Template.create.events = {
+        	"click #login-button": @onCreate
         }
 
-    onSignUp: (event, template) =>
+    onCreate: (event, template) =>
         #=======================================================================
         # Event: onSignUp
         #
@@ -42,7 +42,7 @@ class @Client
         )
 
         # send them to the new wiki
-        Router.go("/public/" + wiki)
+        Router.go("/wikis/" + wiki)
 
     isValidWiki: (wiki_name) =>
         if Wikis.findOne({name: wiki_name})

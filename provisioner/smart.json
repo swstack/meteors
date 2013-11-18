@@ -2,6 +2,7 @@
   "packages": {
     "router": {},
     "iron-router": {},
-    "handlebars-server": {}
+    "handlebars-server": {},
+    "event-hooks": {}
   }
 }

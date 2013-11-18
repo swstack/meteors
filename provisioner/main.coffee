@@ -13,10 +13,6 @@ if Meteor.isClient
     client = new Client
     router = new WikiRouter(client)
 
-    # start
-    client.start()
-    router.start()
-
     # development only, create debug page
     debugDeps = {
         "client": client,
@@ -24,6 +20,10 @@ if Meteor.isClient
     }
     debug = new DebugPage(debugDeps)
     debug.start()
+
+    # start
+    client.start()
+    router.start()
 
     # log completion of setup
     console.log "Client initialization complete."

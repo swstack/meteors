@@ -7,6 +7,10 @@ body {
     margin: auto;
 }
 
+.login-bar{
+    float: top;
+}
+
 .datOrangeText {
     color: #FE642E;
 }
@@ -19,13 +23,13 @@ body {
     background-color: #D8D8D8;
 }
 
-#title {
+.bitwise {
     text-align: center;
     font-family: 'Bitwise';
     font-size: 100px;
 }
 
-#slogan {
+.urban-jungle {
     text-align: center;
     font-family: 'UrbanJungle';
     font-size: 70px;

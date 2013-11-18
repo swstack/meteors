@@ -4,7 +4,8 @@
     "basePackages": {
       "router": {},
       "iron-router": {},
-      "handlebars-server": {}
+      "handlebars-server": {},
+      "event-hooks": {}
     },
     "packages": {
       "router": {
@@ -21,6 +22,11 @@
         "git": "https://github.com/EventedMind/meteor-handlebars-server.git",
         "tag": "v1.1.0",
         "commit": "ed99c8e9280894519f44a5b4c84f66ff596c5450"
+      },
+      "event-hooks": {
+        "git": "https://github.com/BenjaminRH/meteor-event-hooks.git",
+        "tag": "v1.4.3",
+        "commit": "ba4f3d7887748458618d29615492906f0c88d31c"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

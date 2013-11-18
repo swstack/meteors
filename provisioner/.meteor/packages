@@ -13,3 +13,4 @@ accounts-password
 accounts-google
 accounts-base
 accounts-ui
+event-hooks
