@@ -3,6 +3,7 @@
     "router": {},
     "iron-router": {},
     "handlebars-server": {},
-    "event-hooks": {}
+    "event-hooks": {},
+    "roles": {}
   }
 }

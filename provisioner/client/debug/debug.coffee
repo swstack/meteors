@@ -1,9 +1,9 @@
 class @DebugPage
-    constructor: (appDeps) ->
+    constructor: (wiki_manager) ->
         #=======================================================================
-        # Router constructor
+        # DebugPage constructor
         #=======================================================================
-        @appDeps = appDeps
+        @wiki_manager = wiki_manager
 
     start: () =>
         #=======================================================================
@@ -17,19 +17,14 @@ class @DebugPage
                 template: "debug"
             }
 
-        @setupTemplates(@appDeps["client"],
-                        @appDeps["router"])
+        @setupTemplates()
 
     debugLoop: () =>
-        client = @appDeps["client"]
-        wikis = client.getWikis()
 
-    setupTemplates: (client, router) =>
-        Template.debug.wikis = () ->
-            wikis = client.getWikis()
-            return wikis
 
-        Template.debug.users = () ->
-            users = Meteor.users.find().fetch()
-            console.log users
-            return users
+    setupTemplates: () =>
+        Template.debug.wikis = () =>
+            
+
+        Template.debug.users = () =>
+            return Meteor.users.find({}).fetch()           

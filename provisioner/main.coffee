@@ -10,19 +10,16 @@ if Meteor.isServer
 
 if Meteor.isClient
     # create app components and inject dependencies
-    client = new Client
-    router = new WikiRouter(client)
+    user_manager = new UserManager
+    wiki_manager = new WikiManager(user_manager)
+    router = new WikiRouter(wiki_manager, user_manager)
 
     # development only, create debug page
-    debugDeps = {
-        "client": client,
-        "router": router,
-    }
-    debug = new DebugPage(debugDeps)
+    debug = new DebugPage(wiki_manager)
     debug.start()
 
     # start
-    client.start()
+    wiki_manager.start()
     router.start()
 
     # log completion of setup

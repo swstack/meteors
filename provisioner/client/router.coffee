@@ -1,9 +1,10 @@
 class @WikiRouter
-    constructor: (client) ->
+    constructor: (wiki_manager, user_manager) ->
         #=======================================================================
         # Router constructor
         #=======================================================================
-        @client = client
+        @wiki_manager = wiki_manager
+        @user_manager = user_manager
 
     start: () =>
         #=======================================================================
@@ -13,7 +14,7 @@ class @WikiRouter
             layoutTemplate: "layout"
         })
 
-        @mapRoutes(@client)
+        @mapRoutes()
 
         Hooks.onLoggedIn = () ->
             @onLoggedIn
@@ -21,7 +22,7 @@ class @WikiRouter
         Hooks.onLoggedOut = () ->
             @onLoggedOut
 
-        Hooks.init()
+        Hooks.init()        
 
     onLoggedIn: () =>
         Router.go(window.location.pathname)
@@ -29,28 +30,45 @@ class @WikiRouter
     onLoggedOut: () =>
         Router.go(window.location.pathname)
 
-    mapRoutes: (client) =>
+    mapRoutes: () =>
         #=======================================================================
-        # Closure for the router so it has a ref to ``client``
+        # Closure for the router so it has a ref to ``wiki_manager``
         #=======================================================================
+        wiki_manager = @wiki_manager
+        user_manager = @user_manager
+        self = this
+
         Router.map(() ->
             this.route("home", {
-                path: "/wikis/:wikiName"
+                path: "/wikis/:wiki_name"
                 template: "wiki"
+
                 action: () ->
-                    wikiName = this.params.wikiName
-                    if client.isValidWiki(wikiName)
-                        console.log "Welcome to - " + wikiName
+                    wiki_name = this.params.wiki_name
+                    has_rights = wiki_manager.hasRights(wiki_name)
+                    if has_rights
+                        console.log "Welcome to - " + wiki_name
                         this.render("wiki")
+                        Session.set("current_wiki", wiki_name)
                     else
-                        console.log "Not a valid wiki name - " + wikiName
-                        this.render("signup")
-                        Router.go("signUp")
+                        console.log "Not a valid wiki name - " + wiki_name
+                        this.render("landing")
+                        Router.go("landing")
+
+                waitOn: () ->
+                    return Meteor.subscribe("wikis")
                 })
 
             this.route("create", {
                 path: "/create"
                 template: "create"
+                action: () ->
+                    loggedIn = user_manager.isLoggedIn()
+                    if loggedIn
+                        this.render("create")
+                    else
+                        Router.go("landing")
+                        this.render("landing")
                 })
 
             this.route("dashboard", {

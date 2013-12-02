@@ -5,7 +5,8 @@
       "router": {},
       "iron-router": {},
       "handlebars-server": {},
-      "event-hooks": {}
+      "event-hooks": {},
+      "roles": {}
     },
     "packages": {
       "router": {
@@ -27,6 +28,11 @@
         "git": "https://github.com/BenjaminRH/meteor-event-hooks.git",
         "tag": "v1.4.3",
         "commit": "ba4f3d7887748458618d29615492906f0c88d31c"
+      },
+      "roles": {
+        "git": "https://github.com/alanning/meteor-roles.git",
+        "tag": "v1.0.6",
+        "commit": "f81cbf7c765a4ed7e16a580c288db6f10a90856b"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

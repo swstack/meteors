@@ -17,28 +17,42 @@
 </template>
 
 <template name="layout">
-  {{yield}}
+  <div class="container">
+    {{yield}}
+  </div>
 </template>
 
 <template name="landing">
   {{> login-bar}}
+  <h3 class="urban-jungle">Landing Page</h3>
   <h3 class="urban-jungle">Humon's Only!</h3>
 </template>
 
 <template name="dashboard">
-  {{> login-bar}}
-  <h3 class="bitwise">Dashboard</h3>
-  <ul>
-    <li>
-      <a href="/profile">Profile</a>
-    </li>
-    <li>
-      Wikis
-    </li>
-    <li>
-      <a href="/create">Create New Wiki</a>
-    </li>
-  </ul>
+    {{> login-bar}}
+    <h3 class="bitwise">Dashboard</h3>
+    <hr>
+    <div class="row">
+
+    </div>
+    <h4>Public Wikis</h4>
+    <ul>
+      {{#each wikis.public}}
+        <li><a href="/wikis/{{name}}">{{name}}</a></li>
+      {{/each}}
+    </ul>
+    <h4>Private Wikis</h4>
+    <ul>
+      {{#each wikis.private}}
+        <li><a href="/wikis/{{name}}">{{name}}</a></li>
+      {{/each}}
+    </ul>
+    <h4>Other Links</h4>
+    <ul>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/create">Create Wiki</a></li>
+    </ul>
+
 </template>
 
 <template name="create">
@@ -48,7 +62,10 @@
         <label>Wiki Name</label>
         <input type="text" id="create-wiki-name" placeholder="Name"/>
         <label>Visibility</label>
-        <input type="text" id="create-visibility" placeholder="Public or Private"/>
+        <select id="create-wiki-visibility">
+          <option value="public">Public</option>
+          <option value="private">Private</option>
+        </select>
         <button class="btn-inverse datOrangeBackground" id="login-button">
           Let's <span> Do This! </span>
         </button>
@@ -57,13 +74,12 @@
 </template>
 
 <template name="wiki">
-    <h1>Wiki</h1>
-    {{loginButtons}}
-</template>
-
-<template name="login">
-    <h1>Login</h1>
-    {{loginButtons}}
+  <div class="container">
+    {{> login-bar}}
+    <h3 class="bitwise">{{currentWiki}}</h3>
+    <hr>
+    Wiki contents
+  </div>
 </template>
 
 <template name="loading">
