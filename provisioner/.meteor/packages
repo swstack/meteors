@@ -14,3 +14,7 @@ accounts-base
 accounts-ui
 event-hooks
 roles
+spin
+less
+accounts-ui-bootstrap-3
+bootstrap3-less

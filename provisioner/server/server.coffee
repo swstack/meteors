@@ -1,5 +1,3 @@
-Wikis = new Meteor.Collection("wikis")
-
 class @Server
     constructor: () ->
         #=======================================================================

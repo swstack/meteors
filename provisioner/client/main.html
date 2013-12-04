@@ -17,16 +17,47 @@
 </template>
 
 <template name="layout">
-  <div class="container">
-    {{yield}}
-  </div>
+  {{yield}}
 </template>
+
+
+<template name="wiki">
+  {{yield 'toolbar'}}
+
+
+    <div id="container" class="fixed-header">
+        {{> left_nav}}
+
+        <div id="content">
+            <div class="container">
+
+            </div>
+        </div>
+         {{> entry_sidebar}}
+
+    </div>
+
+  {{> newUserModal }}
+  {{> deleteConfirmModal }}
+</template>
+
+
+<template name="editEntry">
+    <textarea id="entry-text" placeholder="Just some friendly placeholder text.">{{text}}</textarea>
+</template>
+
+
+<template name="loading">
+    {{> spinner}}
+</template>
+
 
 <template name="landing">
   {{> login-bar}}
   <h3 class="urban-jungle">Landing Page</h3>
   <h3 class="urban-jungle">Humon's Only!</h3>
 </template>
+
 
 <template name="dashboard">
     {{> login-bar}}
@@ -52,8 +83,8 @@
       <li><a href="/profile">Profile</a></li>
       <li><a href="/create">Create Wiki</a></li>
     </ul>
-
 </template>
+
 
 <template name="create">
   <h1 class="bitwise">create</h1>
@@ -73,15 +104,28 @@
   </div>
 </template>
 
-<template name="wiki">
-  <div class="container">
-    {{> login-bar}}
-    <h3 class="bitwise">{{currentWiki}}</h3>
-    <hr>
-    Wiki contents
-  </div>
-</template>
 
-<template name="loading">
-    <h1>Loading...</h1>
+<template name="deleteConfirmModal">
+
+    <div id="delete-confirm-modal" class="modal hide fade">
+        <div class="modal-header">
+            <h3>Delete Page</h3>
+        </div>
+        
+        {{#isolate}}
+        <div class="modal-body">
+            <h4>Warning:</h4>
+            <p>This will delete the current page and all the content inside.</p>
+            <p> </p>
+            <p>If you are sure please type in DELETE below:</p>
+            <input type="text" id="delete-confirm-input"/>
+
+        </div>
+        
+        <div class="modal-footer">
+            <a id="delete-confirm-button" href="javascript:void(0);" class="btn btn-danger"> DELETE NOW</a>
+            <a id="delete-cancel-button" href="javascript:void(0);" class="btn btn-primary"> Do not Delete</a>
+        </div>
+        {{/isolate}}
+    </div>
 </template>

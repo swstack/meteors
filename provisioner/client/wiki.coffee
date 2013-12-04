@@ -1,6 +1,3 @@
-Wikis = new Meteor.Collection("wikis")
-
-
 class @WikiManager
     constructor: (user_manager) ->
         #=======================================================================

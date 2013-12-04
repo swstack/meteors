@@ -14,23 +14,23 @@ class @WikiRouter
             layoutTemplate: "layout"
         })
 
-        @mapRoutes()
+        @_mapRoutes()
 
         Hooks.onLoggedIn = () ->
-            @onLoggedIn
+            @_onLoggedIn
 
         Hooks.onLoggedOut = () ->
-            @onLoggedOut
+            @_onLoggedOut
 
         Hooks.init()        
 
-    onLoggedIn: () =>
+    _onLoggedIn: () =>
         Router.go(window.location.pathname)
 
-    onLoggedOut: () =>
+    _onLoggedOut: () =>
         Router.go(window.location.pathname)
 
-    mapRoutes: () =>
+    _mapRoutes: () =>
         #=======================================================================
         # Closure for the router so it has a ref to ``wiki_manager``
         #=======================================================================
@@ -100,3 +100,27 @@ class @WikiRouter
                     Router.go("landing")
                 })
         )
+
+    navigate: (location, context) =>
+        location = "/u/#{context}/#{location}" if context
+        location = '/'+location if location.indexOf('/') != 0 #prevents calling route directly
+        Router.go(location)
+
+    evtNavigate: (evt) =>
+        evt.preventDefault()
+        if Session.get('editMode')
+            Toast.warning('Save or Cancel changes before navigating away')
+            return
+        window.scrollTo(0,0)
+        document.body.style.height = "" # restore bigger document from magicscroll
+
+        $a = $(evt.target).closest('a')
+        href = $a.attr('href')
+        localhost = document.location.host
+        linkhost = $a[0].host
+        if localhost == linkhost
+            # support for full local URLs (e.g. http://www.yourwiki.com/page <-- won't refresh)
+            relHref = $('<a/>').attr( 'href', href )[0].pathname
+            navigate(relHref)
+        else
+            window.open( href, '_blank')

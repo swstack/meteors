@@ -1,5 +1,9 @@
 if Meteor.isServer
-    # create app components and inject dependencies
+    #=======================================================================
+    # Construct server-side components, injecting needed dependencies.
+    #=======================================================================
+
+    # core logic
     server = new Server
 
     # start
@@ -9,18 +13,30 @@ if Meteor.isServer
     console.log "Server initialization complete."
 
 if Meteor.isClient
-    # create app components and inject dependencies
+    #=======================================================================
+    # Construct client-side components, injecting needed dependencies.
+    #=======================================================================
+
+    # core logic
     user_manager = new UserManager
     wiki_manager = new WikiManager(user_manager)
     router = new WikiRouter(wiki_manager, user_manager)
 
-    # development only, create debug page
-    debug = new DebugPage(wiki_manager)
-    debug.start()
+    # template helpers
+    entry = new Entry(router)
+    left_nav = new LeftNav(router)
+    entry_sidebar = new EntrySidebar(router, entry) 
 
-    # start
+    # debug only
+    debug = new DebugPage(wiki_manager)
+
+    # start all!
+    debug.start()
     wiki_manager.start()
     router.start()
+    entry.start()
+    left_nav.start()
+    entry_sidebar.start()
 
     # log completion of setup
     console.log "Client initialization complete."

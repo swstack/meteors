@@ -1,9 +1,18 @@
 {
   "packages": {
+    "require": {},
+    "toastjs": {},
     "router": {},
+    "select2": {},
+    "typeahead-js": {},
     "iron-router": {},
+    "momentjs": {},
     "handlebars-server": {},
     "event-hooks": {},
-    "roles": {}
+    "roles": {},
+    "spin": {},
+    "accounts-ui-bootstrap-3": {},
+    "bootstrap3-less": {},
+    "font-awesome": {}
   }
 }
