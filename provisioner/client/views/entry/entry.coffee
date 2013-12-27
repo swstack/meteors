@@ -64,7 +64,7 @@ class @Entry
                     evt.preventDefault()
                     return
                 else
-                    @router.evtNavigate(e)
+                    @router.evtNavigate(evt)
 
             # for Create It! button on new page
             'click .edit': (evt) ->

@@ -10,14 +10,8 @@
 <body>
 </body>
 
-<template name="login-bar">
-  <div class="login-bar">
-    {{loginButtons}}
-  </div>
-</template>
-
 <template name="layout">
-  {{yield}}
+    {{yield}}
 </template>
 
 
@@ -53,14 +47,14 @@
 
 
 <template name="landing">
-  {{> login-bar}}
+  {{ loginButtons}}
   <h3 class="urban-jungle">Landing Page</h3>
   <h3 class="urban-jungle">Humon's Only!</h3>
 </template>
 
 
 <template name="dashboard">
-    {{> login-bar}}
+    {{ loginButtons }}
     <h3 class="bitwise">Dashboard</h3>
     <hr>
     <div class="row">

@@ -26,6 +26,8 @@ if Meteor.isClient
     entry = new Entry(router)
     left_nav = new LeftNav(router)
     entry_sidebar = new EntrySidebar(router, entry) 
+    page_index = new PageIndex(router)
+    search = new Searching(router)
 
     # debug only
     debug = new DebugPage(wiki_manager)
@@ -37,6 +39,8 @@ if Meteor.isClient
     entry.start()
     left_nav.start()
     entry_sidebar.start()
+    page_index.start()
+    search.start()
 
     # log completion of setup
     console.log "Client initialization complete."

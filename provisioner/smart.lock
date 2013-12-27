@@ -9,7 +9,6 @@
       "typeahead-js": {},
       "iron-router": {},
       "momentjs": {},
-      "handlebars-server": {},
       "event-hooks": {},
       "roles": {},
       "spin": {},
@@ -52,11 +51,6 @@
         "git": "https://github.com/crapthings/meteor-momentjs.git",
         "tag": "v2.1.0.2",
         "commit": "59a762e297082eea8b8cae00374c2b7ac6f89529"
-      },
-      "handlebars-server": {
-        "git": "https://github.com/EventedMind/meteor-handlebars-server.git",
-        "tag": "v1.1.0",
-        "commit": "ed99c8e9280894519f44a5b4c84f66ff596c5450"
       },
       "event-hooks": {
         "git": "https://github.com/BenjaminRH/meteor-event-hooks.git",

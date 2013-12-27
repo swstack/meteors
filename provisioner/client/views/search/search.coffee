@@ -1,12 +1,24 @@
-Template.search.term = -> Session.get( 'search-term' )
+class @Searching
+    constructor: (router) ->
+        #=======================================================================
+        # Search constructor
+        #=======================================================================
+        @router = router
 
-Template.search.results = ->
-    term = Session.get('search-term')
+    start: () =>
+        #=======================================================================
+        # Start
+        #=======================================================================
+        Template.search.events = {
+            'click a': @router.evtNavigate
+        }
 
-    return unless term
-    
-    entries = Entries.find( {text: new RegExp( term, "i" )} )
-    EntryLib.getSummaries( entries )
+        Template.search.term = -> Session.get( 'search-term' )
 
-Template.search.events
-    'click a': evtNavigate
+        Template.search.results = ->
+            term = Session.get('search-term')
+
+            return unless term
+
+            entries = Entries.find( {text: new RegExp( term, "i" )} )
+            EntryLib.getSummaries( entries )
