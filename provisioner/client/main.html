@@ -4,19 +4,14 @@
   	<link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
   	<link href="/css/style.css" rel="stylesheet" media="screen">
   	<link href="/css/bootstrap-glyphicons.css" rel="stylesheet">
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 </body>
 
 <template name="layout">
-    {{yield}}
-</template>
 
-
-<template name="wiki">
-  {{yield 'toolbar'}}
+    {{yield 'toolbar'}}
 
 
     <div id="container" class="fixed-header">
@@ -24,7 +19,7 @@
 
         <div id="content">
             <div class="container">
-
+              {{yield}}
             </div>
         </div>
          {{> entry_sidebar}}
@@ -33,6 +28,8 @@
 
   {{> newUserModal }}
   {{> deleteConfirmModal }}
+
+
 </template>
 
 
@@ -54,11 +51,11 @@
 
 
 <template name="dashboard">
-    {{ loginButtons }}
-    <h3 class="bitwise">Dashboard</h3>
-    <hr>
+    
     <div class="row">
-
+      {{ loginButtons}}
+      <h3 class="bitwise">Dashboard</h3>
+      <hr>
     </div>
     <h4>Public Wikis</h4>
     <ul>

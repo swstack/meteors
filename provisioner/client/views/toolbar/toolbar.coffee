@@ -2,6 +2,7 @@ Template.toolbar.entry = ->
     Template.entry.entry()
 
 Template.toolbar.hide_toolbar = ->
+    console.log("wtf")
     editingComment = Session.get('selectedCommentId')
     addingComment = Session.get('addingComment')
     if editingComment or addingComment

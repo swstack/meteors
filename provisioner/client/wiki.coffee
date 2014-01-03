@@ -29,8 +29,8 @@ class @WikiManager
 
             return wikis_for_user
 
-        Template.wiki.currentWiki = () ->
-            return Session.get("current_wiki")
+        # Template.wiki.currentWiki = () ->
+        #     return Session.get("current_wiki")
 
     onCreate: (event, template) =>
         #=======================================================================
